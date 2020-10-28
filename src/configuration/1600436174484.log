@@ -1,0 +1,9 @@
+!SESSION Fri Sep 18 10:36:14 ART 2020 ------------------------------------------
+!ENTRY org.eclipse.equinox.launcher 4 0 2020-09-18 10:36:14.492
+!MESSAGE Exception launching the Eclipse Platform:
+!STACK
+java.io.FileNotFoundException: Could not find framework under c:\workspace\drCasa1\src\plugins
+	at org.eclipse.equinox.launcher.Main.getBootPath(Main.java:979)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:574)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
