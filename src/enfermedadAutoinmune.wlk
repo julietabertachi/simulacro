@@ -3,7 +3,10 @@ class Famiglia {
 	const miembros = #{}
 
 	method tieneUnSoloDon() {
-		return miembros.filter({ m => m.rango() == "don" }).size() == 1
+		return self.miembrosQueSonDe("don").size() == 1
+	}
+	method miembrosQueSonDe(rango){
+		return miembros.filter({ m => m.rango() == rango })
 	}
 
 }
@@ -42,7 +45,7 @@ class Don inherits Miembro {
 
 	method seHaceDon() {
 		rango = "don"
-		subordinados = famiglia.miembros().filter({ m => m.rango() != "don" })
+		subordinados = famiglia.miembrosQueSonDe("don").negate()
 	}
 
 	override method haceSuTrabajo(alguien) {
@@ -55,17 +58,18 @@ class Subjefe inherits Miembro {
 
 	var ultimaArmaQueUso
 	var subordinados
-
+	method ultimaArmaQueUso(algo){
+		ultimaArmaQueUso = algo
+	}
 	method seHaceSubjefe() {
-		subordinados = famiglia.miembros().filter({ m => m.rango() == "soldado" })
+		subordinados = famiglia.miembrosQueSonDe("soldado")
 		rango = "subjefe"
 	}
 
 	override method haceSuTrabajo(alguien) {
-		armas.filter({ a => a != ultimaArmaQueUso}).any({ a =>
-			a.usar()
-			ultimaArmaQueUso = a
-		})
+		const unArma = armas.filter({ a => a != ultimaArmaQueUso}).head()
+		unArma.usar()
+		ultimaArmaQueUso = unArma
 	}
 
 }
